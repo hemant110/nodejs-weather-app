@@ -61,9 +61,11 @@ app.get("/weather", (req, res) => {
           error,
         });
       }
+      const temp = parseFloat((response2.temperature - 32) * 5/9).toFixed(2);
+      const feelslike = parseFloat((response2.feelslike - 32) * 5/9).toFixed(2);
       res.send({
         loc: location,
-        fore: `temperature is ${(response2.temperature - 32) * 5/9} but it feels like ${(response2.feelslike - 32) * 5/9}`,
+        fore: `Its ${response2.weather_descriptions[0]} currently and temperature is ${temp} but it feels like ${feelslike} and there is wind speed of ${response2.wind_speed}.`,
         address: req.query.location
       })
     });
